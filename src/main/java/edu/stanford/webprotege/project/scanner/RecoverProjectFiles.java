@@ -25,23 +25,6 @@ public class RecoverProjectFiles {
         out = System.out;
     }
 
-    public static void main(String[] args) throws Exception {
-        if(args.length != 1) {
-            System.out.println("Expected one argument (project directory path)");
-            return;
-        }
-        File file = new File(args[0]);
-        if(!file.exists()) {
-            System.out.printf("Directory does not exist (%s)", file);
-            return;
-        }
-        if(!file.isDirectory()) {
-            System.out.printf("Expected path to directory (%s)", file);
-        }
-        RecoverProjectFiles recoverProjectFiles = new RecoverProjectFiles(file);
-        recoverProjectFiles.recoverFiles();
-    }
-
     private void recoverFiles() {
         try {
             attemptToReadDocument("Root ontology", getRootOntologyDocument(), new BinaryOWLOntologyDocumentConsumer());
@@ -75,5 +58,24 @@ public class RecoverProjectFiles {
     private void attemptToReadDocument(String name, File file, FileConsumer consumer) throws FileNotFoundException {
         FileRecoveryTool recoveryTool = new FileRecoveryTool();
         recoveryTool.recoverFileIfNecessary(name, file, consumer);
+    }
+
+
+
+    public static void main(String[] args) throws Exception {
+        if(args.length != 1) {
+            System.out.println("Expected one argument (project directory path)");
+            return;
+        }
+        File file = new File(args[0]);
+        if(!file.exists()) {
+            System.out.printf("Directory does not exist (%s)", file);
+            return;
+        }
+        if(!file.isDirectory()) {
+            System.out.printf("Expected path to directory (%s)", file);
+        }
+        RecoverProjectFiles recoverProjectFiles = new RecoverProjectFiles(file);
+        recoverProjectFiles.recoverFiles();
     }
 }
