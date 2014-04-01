@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * @author Matthew Horridge, Stanford University, Bio-Medical Informatics Research Group, Date: 02/03/2014
  */
@@ -19,7 +21,7 @@ public class RecoverProjectFiles {
     private File projectDirectory;
 
     public RecoverProjectFiles(File projectDirectory) {
-        this.projectDirectory = projectDirectory;
+        this.projectDirectory = checkNotNull(projectDirectory);
         out = System.out;
     }
 
