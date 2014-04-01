@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>wp-7dc03ae4-8893-48d6-bec0-3cf7a0ad915b</groupId>
-    <artifactId>wp-7dc03ae4-8893-48d6-bec0-3cf7a0ad915b</artifactId>
+    <groupId>protege.stanford.edu</groupId>
+    <artifactId>wp-maint</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
