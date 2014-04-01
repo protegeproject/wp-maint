@@ -11,7 +11,9 @@ public class RecoverProjectFiles {
 
 
     public static final String CHANGE_DATA_CHANGE_DATA_FILE_PATH = "/change-data/change-data.binary";
-    
+    public static final String ROOT_ONTOLOGY_DOCUMENT_PATH = "/ontology-data/root-ontology.binary";
+    public static final String NOTES_DATA_NOTES_DOCUMENT_PATH = "notes-data/notes-data.binary";
+
     private final PrintStream out;
 
     private File projectDirectory;
@@ -57,11 +59,11 @@ public class RecoverProjectFiles {
     }
 
     private File getRootOntologyDocument() {
-        return new File(projectDirectory, "/ontology-data/root-ontology.binary");
+        return new File(projectDirectory, ROOT_ONTOLOGY_DOCUMENT_PATH);
     }
 
     private File getNotesOntologyDocument() {
-        return new File(projectDirectory, "notes-data/notes-data.binary");
+        return new File(projectDirectory, NOTES_DATA_NOTES_DOCUMENT_PATH);
     }
 
     private File getChangeLogDocument() {
