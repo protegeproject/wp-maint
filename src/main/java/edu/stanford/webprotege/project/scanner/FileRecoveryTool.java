@@ -7,16 +7,17 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.logging.Logger;
 
 /**
  * @author Matthew Horridge, Stanford University, Bio-Medical Informatics Research Group, Date: 01/04/2014
  */
 public class FileRecoveryTool {
 
-    private final PrintStream out;
+    private PrintStream out;
 
-    public FileRecoveryTool() {
-        out = System.out;
+    public FileRecoveryTool(PrintStream logger) {
+        out = logger;
     }
 
     public Optional<File> recoverFileIfNecessary(String name, File file, FileConsumer consumer) throws FileNotFoundException {
@@ -24,29 +25,29 @@ public class FileRecoveryTool {
     }
 
     public Optional<File> recoverFileIfNecessary(String name, File file, FileConsumer consumer, FileRecoveryStrategy recoveryStrategy) throws FileNotFoundException {
-        out.println("Attempting to read " + name);
+        out.printf("Attempting to read %s\n", name);
         ConsumedBytesInfo info = consumer.consume(file);
         if (info.isEndOfFile()) {
-            out.println("\tFile is present and correct");
+            out.printf("\tFile is present and correct\n");
             return Optional.absent();
         }
 
-        out.println("\tCould not read whole file: " + info);
-        out.println("\tMissing " + info.getMissingBytes() + " bytes.");
-        out.println("\tAttempting a recovery...");
+        out.printf("\tCould not read whole file: %s.\n", info);
+        out.printf("\tMissing %d  bytes.\n", info.getMissingBytes());
+        out.printf("\tAttempting a recovery...\n");
         try {
             File recoveredFile = recoverFile(info, recoveryStrategy);
-            out.println("\t\tRecovered file to " + recoveredFile);
-            out.println("\t\tVerifying recovered file...");
+            out.printf("\t\tRecovered file to %s.\n", recoveredFile);
+            out.printf("\t\tVerifying recovered file...\n");
             ConsumedBytesInfo recoveredFileInfo = consumer.consume(recoveredFile);
             if (recoveredFileInfo.isEndOfFile()) {
-                out.println("\t\t\tVerified OK");
+                out.printf("\t\t\tVerified OK\n");
             } else {
-                out.println("\t\t\tVerification failed: " + recoveredFileInfo);
+                out.printf("\t\t\tVerification failed: %s.\n", recoveredFileInfo);
             }
             return Optional.of(recoveredFile);
         } catch (IOException e) {
-            out.println("\t\tThere was an error whilst attempting to recover the file: " + e.getMessage());
+            out.printf("\t\tThere was an error whilst attempting to recover the file: %s.\n", e.getMessage());
             return Optional.absent();
         }
 
