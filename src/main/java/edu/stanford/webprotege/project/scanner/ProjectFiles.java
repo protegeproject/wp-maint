@@ -93,7 +93,7 @@ public class ProjectFiles {
                 System.out.printf("\tFile is o.k.\n");
             }
             else {
-                System.out.printf("\tFile is corrupt.  Manage to parse %d bytes of % bytes.\n", info.getBytesConsumed(), info.getTotalBytes());
+                System.out.printf("\tFile is corrupt.  Manage to parse %d bytes of %d bytes.\n", info.getBytesConsumed(), info.getTotalBytes());
             }
         }
     }
