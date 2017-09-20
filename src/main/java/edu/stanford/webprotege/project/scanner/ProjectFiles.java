@@ -35,11 +35,6 @@ public class ProjectFiles {
             out.printf("Root ontology document does not exist: %s", getRootOntologyDocument());
         }
         try {
-            strategy.handleFile("Notes ontology", getNotesOntologyDocument(), new BinaryOWLOntologyDocumentConsumer());
-        } catch (FileNotFoundException e) {
-            out.printf("Notes ontology document does not exist: %s", getNotesOntologyDocument());
-        }
-        try {
             strategy.handleFile("Change log", getChangeLogDocument(), new BinaryOWLOntologyChangeLogConsumer());
         } catch (FileNotFoundException e) {
             out.printf("Change log does not exist: %s", getChangeLogDocument());
